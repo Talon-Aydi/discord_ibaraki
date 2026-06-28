@@ -42,7 +42,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.yourpackage.Main</mainClass>
+                            <mainClass>discord.ibaraki.Ibaraki</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
