@@ -1,4 +1,4 @@
-package discord.ibaraki.Listeners;
+package discord.ibaraki.listeners;
 
 import discord.ibaraki.helpers.JsonHelper;
 import discord.ibaraki.records.Command;
@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class MessageListener extends ListenerAdapter {
@@ -23,7 +22,6 @@ public class MessageListener extends ListenerAdapter {
         JSONObject json = JsonHelper.read(jsonPath);
         JSONObject commands = json.getJSONObject("commands");
 
-        System.out.println(json);
         for (String key : commands.keySet()) {
             JSONObject innerData = commands.getJSONObject(key);
 
