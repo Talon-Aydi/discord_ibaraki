@@ -23,7 +23,6 @@ public class MessageListener extends ListenerAdapter {
         JSONObject json = JsonHelper.read(jsonPath);
         JSONObject commands = json.getJSONObject("commands");
 
-        System.out.println(json);
         for (String key : commands.keySet()) {
             JSONObject innerData = commands.getJSONObject(key);
 
