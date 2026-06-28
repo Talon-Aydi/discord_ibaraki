@@ -3,6 +3,7 @@ package discord.ibaraki.Listeners;
 import discord.ibaraki.helpers.JsonHelper;
 import discord.ibaraki.records.Command;
 import io.github.cdimascio.dotenv.Dotenv;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +41,13 @@ public class MessageListener extends ListenerAdapter {
 
         String message = event.getMessage().getContentRaw().toLowerCase();
         if (commandCache.containsKey(message)) {
+            if(!event.getMessage().getAttachments().isEmpty()){
+                Message.Attachment attachment = event.getMessage().getAttachments().getFirst();
+                if (attachment.isImage()) {
+                    String imageUrl = attachment.getUrl();
+                    event.getChannel().sendMessage("")
+                }
+            }
             command = commandCache.get(message);
             String finalReply = command.response() + " " + command.emote();
             event.getChannel().sendMessage(finalReply).queue();
