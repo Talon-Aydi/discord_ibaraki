@@ -18,7 +18,7 @@ public class MessageListener extends ListenerAdapter {
 
     public MessageListener() {
         Dotenv dotenv = Dotenv.load();
-        String jsonPath = dotenv.get("COMMAND_LISTENER_PATH");
+        String jsonPath = dotenv.get("COMMAND_LISTENER_PATH") != null ? dotenv.get("COMMAND_LISTENER_PATH") : System.getenv("COMMAND_LISTENER_PATH");
 
         JSONObject json = JsonHelper.read(jsonPath);
         JSONObject commands = json.getJSONObject("commands");

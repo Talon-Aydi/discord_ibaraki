@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class Ibaraki {
     static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
-        String token = dotenv.get("DISCORD_TOKEN");
+        String token = dotenv.get("DISCORD_TOKEN") != null ? dotenv.get("DISCORD_TOKEN") : System.getenv("DISCORD_TOKEN");
 
         JDABuilder.createDefault(token)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
