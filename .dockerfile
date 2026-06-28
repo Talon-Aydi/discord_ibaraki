@@ -4,7 +4,6 @@ WORKDIR /app
 RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:26-jre
-COPY --from=build /app/target/*-jar-with-dependencies.jar /app/bot.jar
 WORKDIR /app
-COPY --from=build /app/target/*.jar /app/bot.jar
+COPY --from=build /app/target/*-jar-with-dependencies.jar /app/bot.jar
 CMD ["java", "-jar", "bot.jar"]
