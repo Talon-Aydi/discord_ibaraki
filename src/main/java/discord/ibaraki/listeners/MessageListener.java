@@ -13,22 +13,31 @@ import java.util.Map;
 
 public class MessageListener extends ListenerAdapter {
     private final Map<String, Command> commandCache = new HashMap<>();
-    private Command command;
 
     public MessageListener() {
-        Dotenv dotenv = Dotenv.load();
-        String jsonPath = dotenv.get("COMMAND_LISTENER_PATH") != null ? dotenv.get("COMMAND_LISTENER_PATH") : System.getenv("COMMAND_LISTENER_PATH");
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        String jsonPath = dotenv.get("COMMAND_LISTENER_PATH") != null ?
+                dotenv.get("COMMAND_LISTENER_PATH")
+                : System.getenv("COMMAND_LISTENER_PATH");
+
+        if (jsonPath == null || jsonPath.isEmpty()) {
+            System.err.println("WARNING: COMMAND_LISTENER_PATH environment variable is missing!");
+            return;
+        }
 
         JSONObject json = JsonHelper.read(jsonPath);
-        JSONObject commands = json.getJSONObject("commands");
+        if (json.has("commands")) {
+            JSONObject commands = json.getJSONObject("commands");
 
-        for (String key : commands.keySet()) {
-            JSONObject innerData = commands.getJSONObject(key);
+            for (String key : commands.keySet()) {
+                JSONObject innerData = commands.getJSONObject(key);
 
-            String response = innerData.getString("response");
-            String emote = innerData.getString("emote");
+                String response = innerData.getString("response");
+                String emote = innerData.getString("emote");
 
-            commandCache.put(key.toLowerCase(), new Command(response, emote));
+                commandCache.put(key.toLowerCase(), new Command(response, emote));
+            }
+            System.out.println("Successfully cached " + commandCache.size() + " commands from JSON.");
         }
     }
 
@@ -39,7 +48,7 @@ public class MessageListener extends ListenerAdapter {
         String message = event.getMessage().getContentRaw().toLowerCase();
         if (commandCache.containsKey(message)) {
 
-            command = commandCache.get(message);
+            Command command = commandCache.get(message);
             String finalReply = command.response() + " " + command.emote();
             event.getChannel().sendMessage(finalReply).queue();
         }
