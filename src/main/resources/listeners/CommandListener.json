@@ -1,0 +1,20 @@
+{
+  "commands": {
+    "*sylus": {
+      "response": "That's my father!",
+      "emote": "<a:talonhearts:1496252763036717199>"
+    },
+    "*xavier": {
+      "response": "That's one of Aphy's husbands",
+      "emote": "<:smug_jany:1519382812141293710>"
+    },
+    "*riri": {
+      "response": "Please don't be scared to update my commands",
+      "emote": "<:cry_jany:1516949603545776273>"
+    },
+    "*talon": {
+      "response": "Hi mom!",
+      "emote": ""
+    }
+  }
+}
