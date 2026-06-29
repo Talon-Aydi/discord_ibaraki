@@ -4,16 +4,14 @@ import discord.ibaraki.listeners.MessageListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class Ibaraki {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(Ibaraki.class)
-                .web(WebApplicationType.NONE)
                 .run(args);
 
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
