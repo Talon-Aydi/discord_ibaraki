@@ -21,6 +21,7 @@ public class MessageListener extends ListenerAdapter {
         if (event.getAuthor().isBot()) return;
 
         String message = event.getMessage().getContentRaw().toLowerCase();
+        System.out.println(message);
         if (commandCache.containsKey(message)) {
 
             Command command = commandCache.get(message);
