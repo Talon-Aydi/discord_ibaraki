@@ -24,21 +24,6 @@ public class MessageListener extends ListenerAdapter {
             System.err.println("WARNING: COMMAND_LISTENER_PATH environment variable is missing!");
             return;
         }
-
-        JSONObject json = JsonHelper.read(jsonPath);
-        if (json.has("commands")) {
-            JSONObject commands = json.getJSONObject("commands");
-
-            for (String key : commands.keySet()) {
-                JSONObject innerData = commands.getJSONObject(key);
-
-                String response = innerData.getString("response");
-                String emote = innerData.getString("emote");
-
-                commandCache.put(key.toLowerCase(), new Command(response, emote));
-            }
-            System.out.println("Successfully cached " + commandCache.size() + " commands from JSON.");
-        }
     }
 
     @Override
