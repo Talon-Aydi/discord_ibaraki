@@ -13,7 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class Ibaraki {
     static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(Ibaraki.class)
-                .web(WebApplicationType.SERVLET)
+                .web(WebApplicationType.NONE)
                 .run(args);
 
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
