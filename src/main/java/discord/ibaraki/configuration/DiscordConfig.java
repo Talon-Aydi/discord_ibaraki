@@ -13,11 +13,6 @@ public class DiscordConfig {
     @Value("${discord.token:}")
     private String token;
 
-    public DiscordConfig(JDA jda) throws InterruptedException {
-        jda.awaitReady();
-        System.out.println("Discord bot is ready");
-    }
-
     @Bean
     public JDA jda(MessageListener listener) {
         return JDABuilder.createDefault(token)
