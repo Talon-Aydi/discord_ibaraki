@@ -1,19 +1,21 @@
 package discord.ibaraki.listeners;
 
+import discord.ibaraki.helpers.CommandLoader;
 import discord.ibaraki.records.Command;
+import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Component;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
 public class MessageListener extends ListenerAdapter {
-    private final Map<String, Command> commandCache = new HashMap<>();
+    private final CommandLoader loader;
 
-    public MessageListener() {
+    public MessageListener(CommandLoader loader) {
+        this.loader = loader;
     }
 
     @Override
@@ -21,12 +23,13 @@ public class MessageListener extends ListenerAdapter {
         if (event.getAuthor().isBot()) return;
 
         String message = event.getMessage().getContentRaw().toLowerCase();
-        System.out.println(message);
-        if (commandCache.containsKey(message)) {
 
-            Command command = commandCache.get(message);
-            String finalReply = command.response() + " " + command.emote();
-            event.getChannel().sendMessage(finalReply).queue();
+        Command cmd = loader.get(message);
+
+        if (cmd != null) {
+            event.getChannel().sendMessage(
+                    cmd.response() + " " + cmd.emote()
+            ).queue();
         }
     }
 }

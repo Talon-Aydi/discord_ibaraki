@@ -1,9 +1,7 @@
 package discord.ibaraki;
 
-import discord.ibaraki.listeners.MessageListener;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -23,8 +21,6 @@ public class Ibaraki {
         }
 
         JDABuilder.createDefault(token)
-                .enableIntents(GatewayIntent.MESSAGE_CONTENT)
-                .addEventListeners(new MessageListener())
                 .build();
     }
 }
