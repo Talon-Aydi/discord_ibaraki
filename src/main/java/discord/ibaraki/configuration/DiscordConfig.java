@@ -10,15 +10,19 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DiscordConfig {
-    @Value("${discord.token}")
+    @Value("${discord.token:}")
     private String token;
 
+    public DiscordConfig(JDA jda) throws InterruptedException {
+        jda.awaitReady();
+        System.out.println("Discord bot is ready");
+    }
+
     @Bean
-    public JDA jda(MessageListener listener) throws InterruptedException {
+    public JDA jda(MessageListener listener) {
         return JDABuilder.createDefault(token)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
                 .addEventListeners(listener)
-                .build()
-                .awaitReady();
+                .build();
     }
 }

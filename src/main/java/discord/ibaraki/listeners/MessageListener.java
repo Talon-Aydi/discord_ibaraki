@@ -2,15 +2,12 @@ package discord.ibaraki.listeners;
 
 import discord.ibaraki.helpers.CommandLoader;
 import discord.ibaraki.records.Command;
-import io.github.cdimascio.dotenv.Dotenv;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
-
+@Component
 public class MessageListener extends ListenerAdapter {
     private final CommandLoader loader;
 
