@@ -15,6 +15,10 @@
     "*talon": {
       "response": "Hi mom!",
       "emote": ""
+    },
+    "Ibaraki, who's your auntie?": {
+      "response": "Bibs",
+      "emote": "<:cry_jany:1516949603545776273>"
     }
   }
 }
