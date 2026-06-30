@@ -1,7 +1,3 @@
-CREATE DATABASE ibaraki_db;
-
-SET FOREIGN_KEY_CHECKS = 0;
-
 DROP TABLE IF EXISTS embed;
 DROP TABLE IF EXISTS command_events;
 DROP TABLE IF EXISTS command_responses;
@@ -11,8 +7,6 @@ DROP TABLE IF EXISTS permissions;
 DROP TABLE IF EXISTS server_mods;
 DROP TABLE IF EXISTS servers;
 
-SET FOREIGN_KEY_CHECKS = 1;
-    
 CREATE TABLE users (
     id BB
 )
