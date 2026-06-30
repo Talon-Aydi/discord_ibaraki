@@ -4,6 +4,7 @@ import discord.ibaraki.records.Command;
 import discord.ibaraki.service.CommandService;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +14,16 @@ import java.util.List;
 public class MessageListener extends ListenerAdapter {
     private final CommandService commandService;
 
-    public MessageListener(CommandService commandService) {
+    public MessageListener(CommandService commandService, JdbcTemplate jdbcTemplate) {
         this.commandService = commandService;
+
+        try {
+            Integer result = jdbcTemplate.queryForObject("SELECT 1", Integer.class);
+            System.out.println("--- DATABASE CONNECTION TEST: SUCCESS! Result is " + result + " ---");
+        } catch (Exception e) {
+            System.err.println("--- DATABASE CONNECTION TEST: FAILED! ---");
+            e.printStackTrace();
+        }
     }
 
     @Override
