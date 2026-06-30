@@ -80,10 +80,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>4.1.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>discord.ibaraki.Ibaraki</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
