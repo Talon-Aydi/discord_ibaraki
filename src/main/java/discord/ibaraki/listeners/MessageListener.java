@@ -1,6 +1,5 @@
 package discord.ibaraki.listeners;
 
-import discord.ibaraki.helpers.CommandLoader;
 import discord.ibaraki.records.Command;
 import discord.ibaraki.service.CommandService;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
