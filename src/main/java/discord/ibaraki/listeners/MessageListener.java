@@ -37,7 +37,7 @@ public class MessageListener extends ListenerAdapter {
             for (Command command : commands) {
                 System.out.println(command.name());
                 if (command.name().equalsIgnoreCase(message)) {
-                    event.getChannel().sendMessage("You tried the following command: " + command.name());
+                    event.getChannel().sendMessage("You tried the following command: " + command.name()).queue();
                     break;
                 }
             }
