@@ -2,17 +2,20 @@ package discord.ibaraki.listeners;
 
 import discord.ibaraki.helpers.CommandLoader;
 import discord.ibaraki.records.Command;
+import discord.ibaraki.service.CommandService;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class MessageListener extends ListenerAdapter {
-    private final CommandLoader loader;
+    private final CommandService commandService;
 
-    public MessageListener(CommandLoader loader) {
-        this.loader = loader;
+    public MessageListener(CommandService commandService) {
+        this.commandService = commandService;
     }
 
     @Override
@@ -21,12 +24,15 @@ public class MessageListener extends ListenerAdapter {
 
         String message = event.getMessage().getContentRaw().toLowerCase();
 
-        Command cmd = loader.get(message);
-
-        if (cmd != null) {
-            event.getChannel().sendMessage(
-                    cmd.response() + " " + cmd.emote()
-            ).queue();
+        List<Command> commands = commandService.getCommands();
+        if (commands != null) {
+            for (Command command : commands) {
+                System.out.println(command.name());
+                if (command.name().equalsIgnoreCase(message)) {
+                    event.getChannel().sendMessage("You tried the following command: " + command.name());
+                    break;
+                }
+            }
         }
     }
 }
