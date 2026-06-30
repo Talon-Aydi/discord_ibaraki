@@ -22,7 +22,7 @@ public class MessageListener extends ListenerAdapter {
         if (event.getAuthor().isBot()) return;
 
         String message = event.getMessage().getContentRaw().toLowerCase();
-
+        System.out.println(message);
         List<Command> commands = commandService.getCommands();
         if (commands != null) {
             for (Command command : commands) {
