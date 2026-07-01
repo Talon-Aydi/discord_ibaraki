@@ -17,4 +17,8 @@ public class CommandService {
     public List<Command> getCommands() {
         return commandRepository.findAll();
     }
+
+    public void createCommand(Command command) {
+        commandRepository.save(command);
+    }
 }
