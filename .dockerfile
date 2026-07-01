@@ -1,9 +1,10 @@
-FROM maven:3.9-eclipse-temurin-26 AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 COPY . /app
 WORKDIR /app
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:26-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /app
-COPY --from=build /app/target/*-jar-with-dependencies.jar /app/bot.jar
-CMD ["java", "-jar", "bot.jar"]
+# Copy the exact bot.jar created by your finalName configuration
+COPY --from=build /app/target/ibaraki-1.0-SNAPSHOT.jar /app/ibaraki-1.0-SNAPSHOT.jar
+CMD ["java", "-jar", "ibaraki-1.0-SNAPSHOT.jar"]
